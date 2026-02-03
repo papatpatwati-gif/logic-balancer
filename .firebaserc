@@ -1,0 +1,10 @@
+{
+  "projects": {
+    "logic": "logic-balancer-premium",
+    "detox": "kaffahmedia-detox",
+    "premium": "logic-balancer-premium",
+    "baru": "managemen-keluarga"
+  },
+  "targets": {},
+  "etags": {}
+}

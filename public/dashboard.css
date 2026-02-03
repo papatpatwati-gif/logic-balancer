@@ -1,0 +1,173 @@
+:root {
+    --primary: #ff85a2;
+    --bg: #fff5f7; 
+    --card: #ffffff;
+    --text: #4a4a4a; 
+    --dim: #9e9e9e; 
+    --gold: #ffb703;
+    --emergency: #9d4edd;
+    --success: #2ecc71;
+    --input-bg: #fdfdfd;
+    --radius: 20px;
+    --accent: #ff4d6d;
+    --card-bg: var(--card);
+}
+
+.dark-theme {
+    --primary: #00adb5; 
+    --bg: #0f172a; 
+    --card: #1e293b;
+    --text: #f8fafc; 
+    --dim: #94a3b8; 
+    --input-bg: #0f172a;
+}
+
+body { 
+    background: var(--bg); color: var(--text); 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+    padding: 20px; display: flex; justify-content: center; 
+    transition: 0.4s; min-height: 100vh; margin: 0;
+}
+
+.app-container { 
+    width: 100%; max-width: 450px; background: var(--card); 
+    border-radius: 30px; padding: 25px; 
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05); align-self: flex-start;
+}
+ header h1 { font-size: 1.3rem; color: var(--primary); margin: 0; text-align: center; letter-spacing: -0.5px; }
+
+/* --- STYLING KALENDER YANG DIPERBAIKI --- */
+.calendar-section {
+    margin: 20px 0; padding: 15px; 
+    background: rgba(0,0,0,0.02);
+    border-radius: var(--radius); border: 1px solid rgba(0,0,0,0.05);
+}
+.dark-theme .calendar-section { background: rgba(255,255,255,0.03); }
+
+.calendar-grid { 
+    display: grid; grid-template-columns: repeat(7, 1fr); 
+    gap: 8px; text-align: center; margin-top: 10px;
+}
+
+.cal-day-label { 
+    font-size: 10px; color: var(--dim); font-weight: 800; 
+    text-transform: uppercase; padding-bottom: 5px;
+}
+
+.cal-cell { 
+    aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; 
+    font-size: 12px; border-radius: 10px; background: var(--input-bg); 
+    color: var(--text); cursor: pointer; border: 1px solid rgba(0,0,0,0.05);
+    transition: 0.3s; font-weight: 600;
+}
+
+.cal-cell:hover { transform: scale(1.1); border-color: var(--primary); }
+.cal-cell.filled { background: var(--primary) !important; color: white !important; border: none; }
+.cal-cell.today { border: 2px solid var(--gold); color: var(--gold); }
+
+/* --- SEKSI PROFIL --- */
+.profile-section { display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; }
+.profile-circle {
+    width: 90px; height: 90px; border-radius: 50%; border: 3px dashed var(--primary);
+    background: var(--input-bg); cursor: pointer; display: flex; justify-content: center; align-items: center;
+    overflow: hidden;
+}
+.profile-circle img { width: 100%; height: 100%; object-fit: cover; }
+.status-select {
+    margin-top: 10px; padding: 6px 12px; border-radius: 12px;
+    border: 1px solid var(--primary); background: var(--card); color: var(--text); font-size: 0.75rem;
+}
+
+/* --- INPUTS & BUTTONS --- */
+.input-group { margin-bottom: 12px; }
+label { display: block; font-size: 0.7rem; color: var(--dim); margin-bottom: 5px; font-weight: 700; text-transform: uppercase; }
+input, textarea { 
+    width: 100%; background: var(--input-bg); border: 1.5px solid #eee; 
+    border-radius: 12px; padding: 12px; color: var(--text); box-sizing: border-box; font-family: inherit; font-size: 0.9rem;
+}
+.dark-theme input, .dark-theme textarea { border-color: #334155; }
+
+.savings-box { border: 2px solid var(--gold); padding: 15px; border-radius: 20px; background: rgba(255, 183, 3, 0.05); margin: 15px 0; }
+.btn-audit { 
+    width: 100%; background: var(--primary); color: white; border: none; 
+    padding: 16px; border-radius: 15px; font-weight: 700; cursor: pointer; margin-top: 10px;
+    box-shadow: 0 4px 12px rgba(255,133,162,0.3);
+}
+
+/* --- HASIL --- */
+.nominal-card { background: rgba(0,0,0,0.02); padding: 12px; border-radius: 12px; text-align: center; border-bottom: 3px solid var(--primary); }
+.nominal-card small { font-size: 0.6rem; font-weight: 700; color: var(--dim); }
+.nominal-card span { font-size: 0.9rem; font-weight: 800; display: block; margin-top: 4px; }
+.chart-container { height: 200px; margin-top: 20px; }
+.theme-toggle { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+.theme-btn {
+    padding: 8px 16px; border-radius: 20px; border: 1px solid var(--primary);
+    background: none; color: var(--primary); cursor: pointer; font-size: 0.7rem; font-weight: 700;
+}
+.theme-btn.active { background: var(--primary); color: white; }
+ #aiResponse { font-size: 0.8rem; line-height: 1.4; }
+.chart-container { height: 180px; margin-top: 15px; }
+
+.footer-brand {
+    margin-top: 30px; padding-top: 20px;
+    border-top: 1px solid rgba(0,0,0,0.05); text-align: center;
+}
+.brand-text {
+    font-size: 0.65rem; font-weight: 800; letter-spacing: 1px;
+    color: var(--dim); text-transform: uppercase; margin: 0;
+}
+.dark-theme .footer-brand { border-top-color: rgba(255,255,255,0.05); }
+
+.hadist-box {
+    margin-top: 15px; padding: 15px; background: rgba(46, 204, 113, 0.1);
+    border-radius: 15px; border-right: 4px solid var(--success); font-size: 0.75rem;
+}
+.arabic-text {
+    display: block; direction: rtl; font-size: 1rem; margin-bottom: 8px;
+    color: var(--text); line-height: 1.6;
+}
+#guideModal {
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+#guideModal h3 {
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1px;
+}
+
+#guideBtn:hover {
+    transform: scale(1.1);
+    background: var(--secondary);
+}
+
+/* DASHBOARD HEADER */
+.app-header {
+    background: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.logout-btn {
+    background: #ff4444;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.app-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+}
+.status-badge {
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
