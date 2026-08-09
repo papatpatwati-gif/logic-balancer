@@ -1,11 +1,5 @@
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-
-<script>
-    // 1. KONFIGURASI FIREBASE
-    const firebaseConfig = {
+// 1. KONFIGURASI FIREBASE
+const firebaseConfig = {
         apiKey: "AIzaSyB7aWSghbfFDj8k7bXuvNZLSlADunEjs78",
         authDomain: "logic-balancer-premium.firebaseapp.com",
         projectId: "logic-balancer-premium",
