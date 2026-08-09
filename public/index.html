@@ -198,6 +198,19 @@ const firebaseConfig = {
         }
     }
 </script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => {
+        console.log('Service Worker terdaftar:', reg);
+      })
+      .catch(err => {
+        console.warn('Service Worker gagal didaftarkan:', err);
+      });
+  });
+}
+</script>
 
 </body>
 </html>
