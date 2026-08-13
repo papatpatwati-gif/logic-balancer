@@ -19,34 +19,19 @@ const firebaseConfig = {
     let myChart = null;
     let journalDB = JSON.parse(localStorage.getItem(DB_KEY) || "{}");
 
-   firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-        db.collection("users").doc(user.uid).get().then((doc) => {
-            if (doc.exists && doc.data().isActive === true) {
-                const userData = doc.data();
-                
-                // 1. Update Teks Status di Dashboard
-                const statusKaryawan = userData.status || "Umum";
-                document.getElementById('displayUserStatus').innerText = "✨ " + statusKaryawan.toUpperCase();
-                
-                // 2. Set value ke hidden input untuk keperluan AI Prompt
-                document.getElementById('userStatus').value = statusKaryawan;
-
-                // 3. Load Foto Profil dari Firebase
-                if (userData.profilePic) {
-                    const imgEl = document.getElementById('profileImg');
-                    imgEl.src = userData.profilePic;
-                    imgEl.style.display = "block";
-                    document.getElementById('placeholderIcon').style.display = "none";
-                }
-            } else {
-                window.location.href = "index.html";
-            }
-        });
-    } else {
-        window.location.href = "index.html";
+   // Inisialisasi dengan status default (tanpa autentikasi)
+    const defaultStatus = "Umum";
+    document.getElementById('displayUserStatus').innerText = "✨ " + defaultStatus.toUpperCase();
+    document.getElementById('userStatus').value = defaultStatus;
+    
+    // Muat foto profil dari localStorage jika ada
+    const savedImg = localStorage.getItem('userImg');
+    if (savedImg) {
+        const imgEl = document.getElementById('profileImg');
+        imgEl.src = savedImg;
+        imgEl.style.display = "block";
+        document.getElementById('placeholderIcon').style.display = "none";
     }
-});
     // 4. LOGIKA UTAMA (PROSES AUDIT & AI)
   async function prosesAudit() {
     const msgBox = document.getElementById('cooldownMessage');
@@ -280,7 +265,11 @@ const firebaseConfig = {
     }
 
     function logout() {
-        firebase.auth().signOut().then(() => { window.location.href = "index.html"; });
+        // Clear local data dan refresh halaman
+        if (confirm("Apakah Anda yakin ingin keluar? Data lokal akan dihapus.")) {
+            localStorage.clear();
+            location.reload();
+        }
     }
     function toggleGuide() {
     const modal = document.getElementById('guideModal');
