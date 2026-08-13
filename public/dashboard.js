@@ -19,19 +19,6 @@ const firebaseConfig = {
     let myChart = null;
     let journalDB = JSON.parse(localStorage.getItem(DB_KEY) || "{}");
 
-   // Inisialisasi dengan status default (tanpa autentikasi)
-    const defaultStatus = "Umum";
-    document.getElementById('displayUserStatus').innerText = "✨ " + defaultStatus.toUpperCase();
-    document.getElementById('userStatus').value = defaultStatus;
-    
-    // Muat foto profil dari localStorage jika ada
-    const savedImg = localStorage.getItem('userImg');
-    if (savedImg) {
-        const imgEl = document.getElementById('profileImg');
-        imgEl.src = savedImg;
-        imgEl.style.display = "block";
-        document.getElementById('placeholderIcon').style.display = "none";
-    }
     // 4. LOGIKA UTAMA (PROSES AUDIT & AI)
   async function prosesAudit() {
     const msgBox = document.getElementById('cooldownMessage');
@@ -251,11 +238,29 @@ const firebaseConfig = {
     }
 
     function checkSavedThemeAndProfile() {
-        if(localStorage.getItem('theme')) setTheme(localStorage.getItem('theme'));
-        if(localStorage.getItem('userImg')) {
-            document.getElementById('profileImg').src = localStorage.getItem('userImg');
-            document.getElementById('profileImg').style.display = "block";
-            document.getElementById('placeholderIcon').style.display = "none";
+        // Set status default
+        const defaultStatus = "Umum";
+        const statusEl = document.getElementById('displayUserStatus');
+        const userStatusEl = document.getElementById('userStatus');
+        
+        if (statusEl) statusEl.innerText = "✨ " + defaultStatus.toUpperCase();
+        if (userStatusEl) userStatusEl.value = defaultStatus;
+        
+        // Load tema
+        if (localStorage.getItem('theme')) {
+            setTheme(localStorage.getItem('theme'));
+        }
+        
+        // Load foto profil
+        const savedImg = localStorage.getItem('userImg');
+        if (savedImg) {
+            const imgEl = document.getElementById('profileImg');
+            const placeholderIcon = document.getElementById('placeholderIcon');
+            if (imgEl && placeholderIcon) {
+                imgEl.src = savedImg;
+                imgEl.style.display = "block";
+                placeholderIcon.style.display = "none";
+            }
         }
     }
 
@@ -338,11 +343,10 @@ function tampilkanQuoteAcak() {
     document.getElementById('quoteAuthor').innerText = `— ${quote.a}`;
 }
 
-// Panggil fungsi ini di dalam window.onload agar muncul saat aplikasi dibuka
-// GABUNGAN SEMUA FUNGSI STARTUP
-window.onload = function() {
+// Panggil fungsi ini di dalam DOMContentLoaded agar halaman tidak berkedip
+document.addEventListener('DOMContentLoaded', function() {
     checkSavedThemeAndProfile(); // Memuat tema & foto profil
     checkCooldownStatus();       // Mengecek apakah tombol sedang cooldown
     renderCalendar();            // Menampilkan kalender
     tampilkanQuoteAcak();        // Menampilkan kutipan islami
-};
+});
